@@ -5,9 +5,10 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.http.isSuccess
 import org.apache.solr.ui.components.indexAndQuery.data.ListCollections
+import org.apache.solr.ui.components.indexAndQuery.store.IndexAndQueryStoreProvider
 
-class HttpIndexAndQueryStoreClient(private val httpClient: HttpClient) {
-    suspend fun fetchCollections(): Result<ListCollections> {
+class HttpIndexAndQueryStoreClient(private val httpClient: HttpClient): IndexAndQueryStoreProvider.Client {
+    override suspend fun fetchCollections(): Result<ListCollections> {
         val response = httpClient.get("api/collections")
         return when {
             response.status.isSuccess() -> Result.success(response.body())

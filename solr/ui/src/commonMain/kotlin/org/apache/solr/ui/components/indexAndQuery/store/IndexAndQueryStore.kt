@@ -6,6 +6,9 @@ import org.apache.solr.ui.components.environment.store.EnvironmentStore.State
 import org.apache.solr.ui.components.indexAndQuery.data.CollectionName
 import org.apache.solr.ui.components.indexAndQuery.data.RequestHandler
 
+/**
+ * The business logic and state of the Index and Query screen
+ */
 internal interface IndexAndQueryStore : Store<Intent, State, Nothing> {
     /**
      * Intent that represents actions the user wants to take on the IndexAndQuery screen
@@ -13,9 +16,14 @@ internal interface IndexAndQueryStore : Store<Intent, State, Nothing> {
     sealed interface Intent {
 
         /**
-         * Intent for requesting system data.
+         * Intent for requesting the list of collections
          */
         data object FetchCollectionsData : Intent
+
+        /**
+         * Intent for requesting the list of request handlers for the selected collection
+         */
+        data object FetchRequestHandlersData: Intent
     }
 
     data class State(
