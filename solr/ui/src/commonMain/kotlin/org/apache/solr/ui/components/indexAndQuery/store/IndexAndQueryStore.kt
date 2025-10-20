@@ -23,7 +23,7 @@ internal interface IndexAndQueryStore : Store<Intent, State, Nothing> {
         /**
          * Intent for requesting the list of request handlers for the selected collection
          */
-        data object FetchRequestHandlersData: Intent
+        data object FetchRequestHandlersData : Intent
     }
 
     data class State(
