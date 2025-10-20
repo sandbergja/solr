@@ -1,9 +1,10 @@
 package org.apache.solr.ui.components.indexAndQuery.store
 
-import org.apache.solr.ui.components.indexAndQuery.data.ListCollections
+import org.apache.solr.ui.components.indexAndQuery.data.CollectionName
+import org.apache.solr.ui.components.indexAndQuery.data.RequestState
 
 class MockedIndexAndQueryStoreClient(
-    private val onFetchCollections: () -> Result<ListCollections>
-): IndexAndQueryStoreProvider.Client {
-    override suspend fun fetchCollections(): Result<ListCollections> = onFetchCollections()
+    private val onFetchCollections: () -> RequestState<CollectionName>,
+) : IndexAndQueryStoreProvider.Client {
+    override suspend fun fetchCollections(): RequestState<CollectionName> = onFetchCollections()
 }
