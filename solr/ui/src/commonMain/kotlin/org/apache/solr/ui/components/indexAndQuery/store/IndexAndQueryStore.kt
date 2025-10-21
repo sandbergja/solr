@@ -5,6 +5,7 @@ import org.apache.solr.ui.components.environment.store.EnvironmentStore.Intent
 import org.apache.solr.ui.components.environment.store.EnvironmentStore.State
 import org.apache.solr.ui.components.indexAndQuery.data.CollectionName
 import org.apache.solr.ui.components.indexAndQuery.data.RequestHandler
+import org.apache.solr.ui.components.indexAndQuery.data.RequestState
 
 /**
  * The business logic and state of the Index and Query screen
@@ -27,7 +28,8 @@ internal interface IndexAndQueryStore : Store<Intent, State, Nothing> {
     }
 
     data class State(
-        val selectedCollection: CollectionName,
-        val selectedRequestHandler: RequestHandler,
+        val selectedCollection: CollectionName?,
+        val selectedRequestHandler: RequestHandler?,
+        val collectionListState: RequestState<CollectionName> = RequestState.Loading<CollectionName>(),
     )
 }
