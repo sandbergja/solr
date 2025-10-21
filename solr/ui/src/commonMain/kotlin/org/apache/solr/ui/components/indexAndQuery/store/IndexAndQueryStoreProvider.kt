@@ -1,16 +1,18 @@
 package org.apache.solr.ui.components.indexAndQuery.store
 
-import com.arkivanov.mvikotlin.core.rx.Disposable
-import com.arkivanov.mvikotlin.core.rx.Observer
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.channels.broadcast
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.apache.solr.ui.components.environment.store.EnvironmentStoreProvider
 import org.apache.solr.ui.components.indexAndQuery.data.CollectionName
 import org.apache.solr.ui.components.indexAndQuery.data.RequestState
+import org.apache.solr.ui.components.indexAndQuery.store.IndexAndQueryStore.Intent
 import org.apache.solr.ui.components.indexAndQuery.store.IndexAndQueryStore.State
 
 internal class IndexAndQueryStoreProvider(
@@ -19,21 +21,15 @@ internal class IndexAndQueryStoreProvider(
     private val mainContext: CoroutineContext,
     private val ioContext: CoroutineContext,
 ) {
-    fun provide(): IndexAndQueryStore = object :
-        IndexAndQueryStore,
-        Store<Intent, State, Nothing> by storeFactory.create(
+    fun provide(): Store<Intent, State, Nothing> {
+        val created = storeFactory.create(
             name = "IndexAndQueryStore",
             initialState = State(null, null),
             bootstrapper = SimpleBootstrapper(Action.FetchCollections),
             executorFactory = ::ExecutorImpl,
             reducer = ReducerImpl,
-        ) {
-        override fun states(observer: Observer<IndexAndQueryStore.State>): Disposable {
-            TODO("Not yet implemented")
-        }
-
-        override fun accept(intent: IndexAndQueryStore.Intent) {
-            TODO("Not yet implemented")
+        )
+        return object : IndexAndQueryStore, Store<Intent, State, Nothing> by created {
         }
     }
 
@@ -43,13 +39,6 @@ internal class IndexAndQueryStoreProvider(
          * Action used for initiating the initial fetch of collections.
          */
         data object FetchCollections : Action
-    }
-
-    private sealed interface Intent {
-        /**
-         * Fetch data about collections
-         */
-        data object FetchCollections : Intent
     }
 
     private sealed interface Message {
@@ -62,18 +51,25 @@ internal class IndexAndQueryStoreProvider(
 
     private inner class ExecutorImpl : CoroutineExecutor<Intent, Action, State, Message, Nothing>(mainContext) {
 
-        override fun executeAction(action: Action) = when (action) {
-            Action.FetchCollections -> {
-                scope.launch { client.fetchCollections() }
+        override fun executeAction(action: Action) {
+            when (action) {
+                Action.FetchCollections -> {
+                    val job = scope.launch {
+                        withContext(ioContext) {
+                            val collections = client.fetchCollections()
+                            dispatch(Message.CollectionsUpdated(collections))
+                        }
+                    }
+                }
             }
         }
 
         override fun executeIntent(intent: Intent) {
-            when (intent) {
-                Intent.FetchCollections -> {
-                    scope.launch { client.fetchCollections() }
-                }
-            }
+//            when (intent) {
+//                Intent.FetchCollectionsData -> {
+            scope.launch { withContext(ioContext) { client.fetchCollections() } }
+//                },
+//            }
         }
     }
 

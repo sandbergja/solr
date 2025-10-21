@@ -11,7 +11,7 @@ interface IndexAndQueryComponent {
 
     /* The state of the Index and Query screen */
     data class Model(
-        val selectedCollection: CollectionName,
-        val selectedRequestHandler: RequestHandler,
+        val selectedCollection: CollectionName?,
+        val selectedRequestHandler: RequestHandler?,
     )
 }

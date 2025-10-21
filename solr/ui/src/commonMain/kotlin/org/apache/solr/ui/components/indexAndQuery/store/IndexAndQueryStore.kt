@@ -1,11 +1,11 @@
 package org.apache.solr.ui.components.indexAndQuery.store
 
 import com.arkivanov.mvikotlin.core.store.Store
-import org.apache.solr.ui.components.environment.store.EnvironmentStore.Intent
-import org.apache.solr.ui.components.environment.store.EnvironmentStore.State
 import org.apache.solr.ui.components.indexAndQuery.data.CollectionName
 import org.apache.solr.ui.components.indexAndQuery.data.RequestHandler
 import org.apache.solr.ui.components.indexAndQuery.data.RequestState
+import org.apache.solr.ui.components.indexAndQuery.store.IndexAndQueryStore.Intent
+import org.apache.solr.ui.components.indexAndQuery.store.IndexAndQueryStore.State
 
 /**
  * The business logic and state of the Index and Query screen
