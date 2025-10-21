@@ -5,11 +5,8 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.http.isSuccess
 import org.apache.solr.ui.components.indexAndQuery.data.CollectionName
-import org.apache.solr.ui.components.indexAndQuery.data.Empty
-import org.apache.solr.ui.components.indexAndQuery.data.Error
 import org.apache.solr.ui.components.indexAndQuery.data.ListCollections
 import org.apache.solr.ui.components.indexAndQuery.data.RequestState
-import org.apache.solr.ui.components.indexAndQuery.data.Success
 import org.apache.solr.ui.components.indexAndQuery.store.IndexAndQueryStoreProvider
 
 class HttpIndexAndQueryStoreClient(private val httpClient: HttpClient) : IndexAndQueryStoreProvider.Client {
@@ -18,9 +15,9 @@ class HttpIndexAndQueryStoreClient(private val httpClient: HttpClient) : IndexAn
         return when {
             response.status.isSuccess() -> {
                 val list: ListCollections = response.body()
-                if (list.collections.isEmpty()) Empty() else Success(list.collections)
+                if (list.collections.isEmpty()) RequestState.Empty() else RequestState.Success(list.collections)
             }
-            else -> Error<CollectionName>(Exception("Unknown Error"))
+            else -> RequestState.Error<CollectionName>(Exception("Unknown Error"))
         }
     }
 }

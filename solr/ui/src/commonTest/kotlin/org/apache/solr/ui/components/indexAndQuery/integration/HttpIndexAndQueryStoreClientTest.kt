@@ -11,8 +11,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlinx.coroutines.test.runTest
-import org.apache.solr.ui.components.indexAndQuery.data.Error
-import org.apache.solr.ui.components.indexAndQuery.data.Success
+import org.apache.solr.ui.components.indexAndQuery.data.CollectionName
+import org.apache.solr.ui.components.indexAndQuery.data.RequestState
 import org.apache.solr.ui.components.indexAndQuery.integration.HttpIndexAndQueryStoreClient
 import org.apache.solr.ui.testHttpClient
 
@@ -29,7 +29,7 @@ class HttpIndexAndQueryStoreClientTest {
             },
         )
         val response = HttpIndexAndQueryStoreClient(successfulCollectionListClient).fetchCollections()
-        assertTrue(response is Success)
+        assertTrue(response is RequestState.Success)
 
         val iterator = response.iterator()
         assertEquals(iterator.next(), "collection1")
@@ -49,7 +49,7 @@ class HttpIndexAndQueryStoreClientTest {
         )
 
         val response = HttpIndexAndQueryStoreClient(errorClient).fetchCollections()
-        assertTrue(response is Error<*>)
+        assertTrue(response is RequestState.Error<*>)
         assertFalse { response.iterator().hasNext() }
         assertTrue { response.exceptionIterator().hasNext() }
     }
