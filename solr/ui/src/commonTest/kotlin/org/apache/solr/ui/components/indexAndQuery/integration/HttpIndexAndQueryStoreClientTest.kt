@@ -32,8 +32,8 @@ class HttpIndexAndQueryStoreClientTest {
         assertTrue(response is RequestState.Success)
 
         val iterator = response.iterator()
-        assertEquals(iterator.next(), "collection1")
-        assertEquals(iterator.next(), "collection2")
+        assertEquals("collection1", iterator.next() )
+        assertEquals("collection2", iterator.next())
         assertFalse { iterator.hasNext() }
     }
 
@@ -51,6 +51,6 @@ class HttpIndexAndQueryStoreClientTest {
         val response = HttpIndexAndQueryStoreClient(errorClient).fetchCollections()
         assertTrue(response is RequestState.Error<*>)
         assertFalse { response.iterator().hasNext() }
-        assertEquals(response.exceptionIterator().next().message, "Received status code 401")
+        assertEquals("Received status code 401", response.exceptionIterator().next().message)
     }
 }
