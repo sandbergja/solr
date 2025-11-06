@@ -27,5 +27,6 @@ val MainComponent.Child.asMainMenu: MainMenu
         is MainComponent.Child.Cluster -> MainMenu.Cluster
         is MainComponent.Child.Configsets -> MainMenu.Configsets
         is MainComponent.Child.Environment -> MainMenu.Environment
+        is MainComponent.Child.IndexAndQuery -> MainMenu.IndexAndQuery
         is MainComponent.Child.Logging -> MainMenu.Logging
     }

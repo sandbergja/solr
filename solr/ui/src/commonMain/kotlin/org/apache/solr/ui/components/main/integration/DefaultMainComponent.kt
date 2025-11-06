@@ -31,6 +31,8 @@ import org.apache.solr.ui.components.configsets.ConfigsetsComponent
 import org.apache.solr.ui.components.configsets.integration.DefaultConfigsetsComponent
 import org.apache.solr.ui.components.environment.EnvironmentComponent
 import org.apache.solr.ui.components.environment.integration.DefaultEnvironmentComponent
+import org.apache.solr.ui.components.indexAndQuery.IndexAndQueryComponent
+import org.apache.solr.ui.components.indexAndQuery.integration.DefaultIndexAndQueryComponent
 import org.apache.solr.ui.components.logging.LoggingComponent
 import org.apache.solr.ui.components.logging.integration.DefaultLoggingComponent
 import org.apache.solr.ui.components.main.MainComponent
@@ -46,6 +48,7 @@ class DefaultMainComponent internal constructor(
     private val clusterComponent: (AppComponentContext) -> ClusterComponent,
     private val configsetsComponent: (AppComponentContext) -> ConfigsetsComponent,
     private val environmentComponent: (AppComponentContext) -> EnvironmentComponent,
+    private val indexAndQueryComponent: (AppComponentContext) -> IndexAndQueryComponent,
     private val loggingComponent: (AppComponentContext) -> LoggingComponent,
     private val output: (Output) -> Unit,
 ) : MainComponent,
@@ -86,6 +89,13 @@ class DefaultMainComponent internal constructor(
         },
         environmentComponent = { childContext ->
             DefaultEnvironmentComponent(
+                componentContext = childContext,
+                storeFactory = storeFactory,
+                httpClient = httpClient,
+            )
+        },
+        indexAndQueryComponent = { childContext ->
+            DefaultIndexAndQueryComponent(
                 componentContext = childContext,
                 storeFactory = storeFactory,
                 httpClient = httpClient,
@@ -144,9 +154,8 @@ class DefaultMainComponent internal constructor(
         // Configuration.Collections ->
         //     NavigationComponent.Child.Collections(collectionsComponent(componentContext))
 
-        // TODO Uncomment once QueriesAndOperations available
-        // Configuration.QueriesAndOperations ->
-        //     NavigationComponent.Child.QueriesAndOperations(queriesAndOperationsComponent(componentContext))
+         Configuration.IndexAndQuery ->
+             Child.IndexAndQuery(indexAndQueryComponent(componentContext))
 
         Configuration.Environment -> Child.Environment(environmentComponent(componentContext))
 
@@ -198,7 +207,7 @@ class DefaultMainComponent internal constructor(
         data object Collections : Configuration
 
         @Serializable
-        data object QueriesAndOperations : Configuration
+        data object IndexAndQuery : Configuration
 
         @Serializable
         data object Environment : Configuration
@@ -217,7 +226,7 @@ class DefaultMainComponent internal constructor(
         MainMenu.Security -> Configuration.Security
         MainMenu.Configsets -> Configuration.Configsets
         MainMenu.Collections -> Configuration.Collections
-        MainMenu.QueriesAndOperations -> Configuration.QueriesAndOperations
+        MainMenu.IndexAndQuery -> Configuration.IndexAndQuery
         MainMenu.Environment -> Configuration.Environment
         MainMenu.Logging -> Configuration.Logging
         MainMenu.ThreadDump -> Configuration.ThreadDump

@@ -59,7 +59,7 @@ import org.apache.solr.ui.generated.resources.nav_dashboard
 import org.apache.solr.ui.generated.resources.nav_environment
 import org.apache.solr.ui.generated.resources.nav_logging
 import org.apache.solr.ui.generated.resources.nav_metrics
-import org.apache.solr.ui.generated.resources.nav_queries_and_operations
+import org.apache.solr.ui.generated.resources.nav_index_and_query
 import org.apache.solr.ui.generated.resources.nav_security
 import org.apache.solr.ui.generated.resources.nav_thread_dump
 import org.apache.solr.ui.views.icons.SolrLogo
@@ -168,7 +168,7 @@ private fun getMainMenuText(item: MainMenu) = when (item) {
     MainMenu.Security -> Res.string.nav_security
     MainMenu.Configsets -> Res.string.nav_configsets
     MainMenu.Collections -> Res.string.nav_collections
-    MainMenu.QueriesAndOperations -> Res.string.nav_queries_and_operations
+    MainMenu.IndexAndQuery -> Res.string.nav_index_and_query
     MainMenu.Environment -> Res.string.nav_environment
     MainMenu.Logging -> Res.string.nav_logging
     MainMenu.ThreadDump -> Res.string.nav_thread_dump
@@ -181,7 +181,7 @@ private fun getMenuIcon(item: MainMenu) = when (item) {
     MainMenu.Security -> Icons.Rounded.Security
     MainMenu.Configsets -> Icons.Rounded.Folder // TODO Update to FolderData
     MainMenu.Collections -> Icons.Rounded.Apps
-    MainMenu.QueriesAndOperations -> Icons.Rounded.DocumentScanner // TODO Update to OtherAdmission
+    MainMenu.IndexAndQuery -> Icons.Rounded.DocumentScanner // TODO Update to OtherAdmission
     MainMenu.Environment -> Icons.Rounded.Memory
     MainMenu.Logging -> Icons.AutoMirrored.Rounded.TextSnippet
     MainMenu.ThreadDump -> Icons.AutoMirrored.Rounded.ViewList
@@ -198,6 +198,7 @@ private fun isSectionAvailable(item: MainMenu): Boolean = when (item) {
     MainMenu.Cluster -> true
     MainMenu.Configsets -> true
     MainMenu.Environment -> true
+    MainMenu.IndexAndQuery -> true
     MainMenu.Logging -> true
     else -> false
 }

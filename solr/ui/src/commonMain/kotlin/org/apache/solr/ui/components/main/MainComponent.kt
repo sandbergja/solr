@@ -22,6 +22,7 @@ import com.arkivanov.decompose.value.Value
 import org.apache.solr.ui.components.cluster.ClusterComponent
 import org.apache.solr.ui.components.configsets.ConfigsetsComponent
 import org.apache.solr.ui.components.environment.EnvironmentComponent
+import org.apache.solr.ui.components.indexAndQuery.IndexAndQueryComponent
 import org.apache.solr.ui.components.logging.LoggingComponent
 import org.apache.solr.ui.components.navigation.NavigationComponent
 import org.apache.solr.ui.components.navigation.TabNavigationComponent
@@ -74,8 +75,12 @@ interface MainComponent : NavigationComponent {
         // TODO Uncomment once MetricsComponent available
         // data class Collections(val component: CollectionsComponent): Child
 
-        // TODO Uncomment once QueriesAndOperationsComponent available
-        // data class QueriesAndOperations(val component: QueriesAndOperationsComponent): Child
+        /**
+         * Child that leads to the Index and Query section.
+         *
+         * @property component Component that holds the state of this child.
+         */
+        data class IndexAndQuery(val component: IndexAndQueryComponent): Child
 
         /**
          * Child that leads to the environment section.
