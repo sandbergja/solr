@@ -1,6 +1,7 @@
 package org.apache.solr.ui.views.indexAndQuery
 
 import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.runComposeUiTest
@@ -16,5 +17,13 @@ class CollectionsDropdownTest {
             CollectionsDropdown(selectedCollection = "my-collection", selectCollection = {}, collectionData = RequestState.Loading<CollectionName>())
         }
         onNodeWithTag("collections_dropdown_textfield").assertIsNotEnabled()
+    }
+
+    @Test
+    fun `when data has loaded, it is enabled`() = runComposeUiTest {
+        setContent {
+            CollectionsDropdown(selectedCollection = "my-collection", selectCollection = {}, collectionData = RequestState.Success<CollectionName>(listOf("my-collection", "my-other-collection")))
+        }
+        onNodeWithTag("collections_dropdown_textfield").assertIsEnabled()
     }
 }

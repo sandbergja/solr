@@ -85,6 +85,7 @@
   <!-- Input Labels -->
   <string name="label_username">Username</string>
   <string name="label_password">Password</string>
+  <string name="label_collection">Collection</string>
 
   <!-- Uncategorized -->
 </resources>

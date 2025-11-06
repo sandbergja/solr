@@ -2,11 +2,16 @@ package org.apache.solr.ui.views.indexAndQuery
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import org.apache.solr.ui.components.indexAndQuery.data.CollectionName
 import org.apache.solr.ui.components.indexAndQuery.data.RequestState
+import org.apache.solr.ui.generated.resources.Res
+import org.apache.solr.ui.generated.resources.label_collection
+import org.apache.solr.ui.generated.resources.label_username
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -19,7 +24,11 @@ fun CollectionsDropdown(
     OutlinedTextField(
         value = selectedCollection,
         onValueChange = {},
-        enabled = false,
-        modifier = Modifier.testTag("collections_dropdown_textfield")
+        enabled = when(collectionData) {
+            is RequestState.Success -> true
+                else -> false
+        },
+        modifier = Modifier.testTag("collections_dropdown_textfield"),
+        label = { Text(stringResource(Res.string.label_collection)) },
     )
 }
