@@ -30,4 +30,26 @@ class IndexAndQueryStoreProviderTest {
 
         assertTrue(store.stateFlow.value.collectionListState is RequestState.Success)
     }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `it can handle a FetchCollectionsData intent`() = runTest {
+        val expectedState = RequestState.Success(listOf("collection1"))
+        val client = MockedIndexAndQueryStoreClient(onFetchCollections = { expectedState })
+
+        val store = IndexAndQueryStoreProvider(
+            storeFactory = DefaultStoreFactory(),
+            client = client,
+            mainContext = StandardTestDispatcher(testScheduler),
+            ioContext = StandardTestDispatcher(testScheduler),
+        ).provide()
+
+        // Send an intent
+        store.accept(IndexAndQueryStore.Intent.FetchCollectionsData)
+        assertTrue(store.stateFlow.value.collectionListState is RequestState.Loading<*>)
+
+        advanceUntilIdle()
+
+        assertTrue(store.stateFlow.value.collectionListState is RequestState.Success)
+    }
 }

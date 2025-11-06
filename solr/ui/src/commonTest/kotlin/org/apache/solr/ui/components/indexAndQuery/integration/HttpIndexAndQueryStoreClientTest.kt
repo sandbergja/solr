@@ -38,7 +38,7 @@ class HttpIndexAndQueryStoreClientTest {
     }
 
     @Test
-    fun `test GIVEN successful fetch of collection list THEN it is a failure`() = runTest {
+    fun `test GIVEN unsuccessful fetch of collection list THEN it is a failure`() = runTest {
         val errorClient = testHttpClient(
             engine = MockEngine { request ->
                 respondError(
@@ -51,6 +51,6 @@ class HttpIndexAndQueryStoreClientTest {
         val response = HttpIndexAndQueryStoreClient(errorClient).fetchCollections()
         assertTrue(response is RequestState.Error<*>)
         assertFalse { response.iterator().hasNext() }
-        assertTrue { response.exceptionIterator().hasNext() }
+        assertEquals(response.exceptionIterator().next().message, "Received status code 401")
     }
 }

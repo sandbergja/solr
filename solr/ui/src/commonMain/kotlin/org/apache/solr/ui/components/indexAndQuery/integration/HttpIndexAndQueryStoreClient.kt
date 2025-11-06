@@ -17,7 +17,7 @@ class HttpIndexAndQueryStoreClient(private val httpClient: HttpClient) : IndexAn
                 val list: ListCollections = response.body()
                 if (list.collections.isEmpty()) RequestState.Empty() else RequestState.Success(list.collections)
             }
-            else -> RequestState.Error<CollectionName>(Exception("Unknown Error"))
+            else -> RequestState.Error<CollectionName>(Exception("Received status code ${response.status.value}"))
         }
     }
 }

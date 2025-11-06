@@ -64,6 +64,9 @@ internal class IndexAndQueryStoreProvider(
             }
         }
 
+        /**
+         * This method handles the Intent that is passed through the store's accept() method
+         */
         override fun executeIntent(intent: Intent) {
 //            when (intent) {
 //                Intent.FetchCollectionsData -> {
