@@ -1,4 +1,4 @@
-package org.apache.solr.ui.components.indexAndQuery
+package org.apache.solr.ui.components.indexAndQuery.integration
 
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -11,9 +11,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlinx.coroutines.test.runTest
-import org.apache.solr.ui.components.indexAndQuery.data.CollectionName
 import org.apache.solr.ui.components.indexAndQuery.data.RequestState
-import org.apache.solr.ui.components.indexAndQuery.integration.HttpIndexAndQueryStoreClient
 import org.apache.solr.ui.testHttpClient
 
 class HttpIndexAndQueryStoreClientTest {
