@@ -48,7 +48,7 @@ fun CollectionsDropdown(
         ) {
 
                 DropdownMenuItem(
-                    text = { "Dogs" },
+                    text = { Text("dogs") },
                     onClick = {},
                 )
         }

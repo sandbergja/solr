@@ -1,10 +1,17 @@
 package org.apache.solr.ui.views.indexAndQuery
 
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.assertTextContains
+import androidx.compose.ui.test.assertValueEquals
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.runComposeUiTest
+import androidx.compose.ui.text.AnnotatedString
 import kotlin.test.Test
 import org.apache.solr.ui.components.indexAndQuery.data.CollectionName
 import org.apache.solr.ui.components.indexAndQuery.data.RequestState
@@ -25,5 +32,14 @@ class CollectionsDropdownTest {
             CollectionsDropdown(selectedCollection = "my-collection", selectCollection = {}, collectionData = RequestState.Success<CollectionName>(listOf("my-collection", "my-other-collection")))
         }
         onNodeWithTag("collections_dropdown_textfield").assertIsEnabled()
+    }
+
+    @Test
+    fun `it displays the name of the selectedCollection as its value`() = runComposeUiTest {
+        setContent {
+            CollectionsDropdown(selectedCollection = "my-collection", selectCollection = {}, collectionData = RequestState.Loading<CollectionName>())
+        }
+        onNodeWithTag("collections_dropdown_textfield").assert(SemanticsMatcher.expectValue(SemanticsProperties.EditableText,
+            AnnotatedString("my-collection")))
     }
 }
