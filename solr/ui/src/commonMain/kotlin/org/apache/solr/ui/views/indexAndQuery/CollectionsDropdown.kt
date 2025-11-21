@@ -37,7 +37,7 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CollectionsDropdown(
-    selectedCollection: CollectionName,
+    selectedCollection: CollectionName?,
     selectCollection: (CollectionName) -> Unit,
     collectionData: RequestState<CollectionName>,
     modifier: Modifier = Modifier
@@ -48,7 +48,7 @@ fun CollectionsDropdown(
         onExpandedChange = { expanded = it}
     ) {
         OutlinedTextField(
-            value = selectedCollection,
+            value = selectedCollection ?: "",
             onValueChange = {},
             enabled = when(collectionData) {
                 is RequestState.Success -> true
