@@ -57,9 +57,9 @@ import org.apache.solr.ui.generated.resources.nav_collections
 import org.apache.solr.ui.generated.resources.nav_configsets
 import org.apache.solr.ui.generated.resources.nav_dashboard
 import org.apache.solr.ui.generated.resources.nav_environment
+import org.apache.solr.ui.generated.resources.nav_index_and_query
 import org.apache.solr.ui.generated.resources.nav_logging
 import org.apache.solr.ui.generated.resources.nav_metrics
-import org.apache.solr.ui.generated.resources.nav_index_and_query
 import org.apache.solr.ui.generated.resources.nav_security
 import org.apache.solr.ui.generated.resources.nav_thread_dump
 import org.apache.solr.ui.views.icons.SolrLogo

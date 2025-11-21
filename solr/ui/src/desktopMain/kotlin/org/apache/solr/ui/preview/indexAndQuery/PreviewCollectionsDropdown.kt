@@ -27,13 +27,12 @@ class PreviewCollectionsDropdown {
     @Preview
     @Composable
     private fun PreviewLoadingCollectionsDropdown() = PreviewContainer {
-        CollectionsDropdown(selectedCollection = "my-collection", selectCollection = {}, collectionData = RequestState.Loading<CollectionName>(), )
+        CollectionsDropdown(selectedCollection = "my-collection", selectCollection = {}, collectionData = RequestState.Loading<CollectionName>())
     }
 
     @Preview
     @Composable
     private fun PreviewSuccessfulCollectionsDropdown() = PreviewContainer {
-        CollectionsDropdown(selectedCollection = "my-collection", selectCollection = {}, collectionData = RequestState.Success<CollectionName>(listOf("my-collection", "my-other-collection")), )
+        CollectionsDropdown(selectedCollection = "my-collection", selectCollection = {}, collectionData = RequestState.Success<CollectionName>(listOf("my-collection", "my-other-collection")))
     }
-
 }

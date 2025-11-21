@@ -46,7 +46,7 @@ class HttpIndexAndQueryStoreClientTest {
         assertTrue(response is RequestState.Success)
 
         val iterator = response.iterator()
-        assertEquals("collection1", iterator.next() )
+        assertEquals("collection1", iterator.next())
         assertEquals("collection2", iterator.next())
         assertFalse { iterator.hasNext() }
     }

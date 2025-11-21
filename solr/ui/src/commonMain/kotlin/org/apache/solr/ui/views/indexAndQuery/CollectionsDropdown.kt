@@ -40,17 +40,17 @@ fun CollectionsDropdown(
     selectedCollection: CollectionName?,
     selectCollection: (CollectionName) -> Unit,
     collectionData: RequestState<CollectionName>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var expanded by remember { mutableStateOf(false) }
     ExposedDropdownMenuBox(
         expanded = expanded,
-        onExpandedChange = { expanded = it}
+        onExpandedChange = { expanded = it },
     ) {
         OutlinedTextField(
             value = selectedCollection ?: "",
             onValueChange = {},
-            enabled = when(collectionData) {
+            enabled = when (collectionData) {
                 is RequestState.Success -> true
                 else -> false
             },
@@ -62,12 +62,10 @@ fun CollectionsDropdown(
             expanded = expanded,
             onDismissRequest = { expanded = false },
         ) {
-
-                DropdownMenuItem(
-                    text = { Text("dogs") },
-                    onClick = {},
-                )
+            DropdownMenuItem(
+                text = { Text("dogs") },
+                onClick = {},
+            )
         }
     }
-
 }

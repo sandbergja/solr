@@ -24,8 +24,10 @@ import androidx.compose.ui.Modifier
 import org.apache.solr.ui.components.indexAndQuery.IndexAndQueryComponent
 
 @Composable
-fun IndexAndQueryContent(component: IndexAndQueryComponent,
-                           modifier: Modifier = Modifier) {
+fun IndexAndQueryContent(
+    component: IndexAndQueryComponent,
+    modifier: Modifier = Modifier,
+) {
     val model by component.model.collectAsState()
     Row {
         CollectionsDropdown(selectedCollection = model.selectedCollection, selectCollection = {}, collectionData = model.collectionsRequest)

@@ -30,6 +30,6 @@ interface IndexAndQueryComponent {
     data class Model(
         val selectedCollection: CollectionName?,
         val selectedRequestHandler: RequestHandler?,
-        val collectionsRequest: RequestState<CollectionName>
+        val collectionsRequest: RequestState<CollectionName>,
     )
 }

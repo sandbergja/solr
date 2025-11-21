@@ -86,7 +86,7 @@ fun MainContent(
                     component = child.component,
                     modifier = Modifier.fillMaxWidth()
                         .verticalScroll(scrollState)
-                        .padding(16.dp)
+                        .padding(16.dp),
                 )
                 is MainComponent.Child.Logging -> LoggingContent(
                     component = child.component,

@@ -80,7 +80,7 @@ interface MainComponent : NavigationComponent {
          *
          * @property component Component that holds the state of this child.
          */
-        data class IndexAndQuery(val component: IndexAndQueryComponent): Child
+        data class IndexAndQuery(val component: IndexAndQueryComponent) : Child
 
         /**
          * Child that leads to the environment section.

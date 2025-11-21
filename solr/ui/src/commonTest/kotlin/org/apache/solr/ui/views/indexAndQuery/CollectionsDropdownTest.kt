@@ -55,7 +55,11 @@ class CollectionsDropdownTest {
         setContent {
             CollectionsDropdown(selectedCollection = "my-collection", selectCollection = {}, collectionData = RequestState.Loading<CollectionName>())
         }
-        onNodeWithTag("collections_dropdown_textfield").assert(SemanticsMatcher.expectValue(SemanticsProperties.EditableText,
-            AnnotatedString("my-collection")))
+        onNodeWithTag("collections_dropdown_textfield").assert(
+            SemanticsMatcher.expectValue(
+                SemanticsProperties.EditableText,
+                AnnotatedString("my-collection"),
+            ),
+        )
     }
 }

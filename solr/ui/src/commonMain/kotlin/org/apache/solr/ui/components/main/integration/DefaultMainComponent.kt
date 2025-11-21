@@ -154,8 +154,8 @@ class DefaultMainComponent internal constructor(
         // Configuration.Collections ->
         //     NavigationComponent.Child.Collections(collectionsComponent(componentContext))
 
-         Configuration.IndexAndQuery ->
-             Child.IndexAndQuery(indexAndQueryComponent(componentContext))
+        Configuration.IndexAndQuery ->
+            Child.IndexAndQuery(indexAndQueryComponent(componentContext))
 
         Configuration.Environment -> Child.Environment(environmentComponent(componentContext))
 

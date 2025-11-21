@@ -32,7 +32,8 @@ class DefaultIndexAndQueryComponent(
     componentContext: AppComponentContext,
     storeFactory: StoreFactory,
     httpClient: HttpClient,
-) : IndexAndQueryComponent, AppComponentContext by componentContext  {
+) : IndexAndQueryComponent,
+    AppComponentContext by componentContext {
     private val mainScope = coroutineScope(SupervisorJob() + mainContext)
     private val ioScope = coroutineScope(SupervisorJob() + ioContext)
 
@@ -47,5 +48,4 @@ class DefaultIndexAndQueryComponent(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val model = store.stateFlow.map(mainScope, indexAndQueryStateToModel)
-
 }

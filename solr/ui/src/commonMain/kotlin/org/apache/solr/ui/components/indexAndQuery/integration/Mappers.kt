@@ -23,6 +23,6 @@ internal val indexAndQueryStateToModel: (IndexAndQueryStore.State) -> IndexAndQu
     IndexAndQueryComponent.Model(
         selectedCollection = it.selectedCollection,
         selectedRequestHandler = it.selectedRequestHandler,
-        collectionsRequest = it.collectionListState
+        collectionsRequest = it.collectionListState,
     )
 }
