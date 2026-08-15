@@ -35,6 +35,7 @@ import org.apache.solr.ui.components.main.integration.asMainMenu
 import org.apache.solr.ui.views.cluster.ClusterContent
 import org.apache.solr.ui.views.configsets.ConfigsetsScene
 import org.apache.solr.ui.views.environment.EnvironmentContent
+import org.apache.solr.ui.views.indexAndQuery.IndexAndQueryScene
 import org.apache.solr.ui.views.logging.LoggingContent
 import org.apache.solr.ui.views.navigation.NavigationSideBar
 
@@ -82,6 +83,11 @@ fun MainContent(
                     modifier = Modifier.fillMaxWidth()
                         .verticalScroll(scrollState)
                         .padding(16.dp),
+                )
+
+                is MainComponent.Child.IndexAndQuery -> IndexAndQueryScene(
+                    component = child.component,
+                    modifier = Modifier.fillMaxWidth(),
                 )
 
                 is MainComponent.Child.Logging -> LoggingContent(

@@ -15,22 +15,9 @@
  * limitations under the License.
  */
 
-package org.apache.solr.ui.components.main.integration
+package org.apache.solr.ui.components.indexAndQuery.integration
 
-import org.apache.solr.ui.components.main.MainComponent
-import org.apache.solr.ui.components.root.RootComponent
-import org.apache.solr.ui.views.navigation.MainMenu
+import org.apache.solr.ui.components.indexAndQuery.IndexAndQueryComponent
+import org.apache.solr.ui.utils.AppComponentContext
 
-val MainComponent.Child.asMainMenu: MainMenu
-    get() = when (this) {
-        // TODO Add additional mappings once more children are supported
-        is MainComponent.Child.Cluster -> MainMenu.Cluster
-
-        is MainComponent.Child.Configsets -> MainMenu.Configsets
-
-        is MainComponent.Child.Environment -> MainMenu.Environment
-
-        is MainComponent.Child.IndexAndQuery -> MainMenu.IndexAndQuery
-
-        is MainComponent.Child.Logging -> MainMenu.Logging
-    }
+class DefaultIndexAndQueryComponent : IndexAndQueryComponent

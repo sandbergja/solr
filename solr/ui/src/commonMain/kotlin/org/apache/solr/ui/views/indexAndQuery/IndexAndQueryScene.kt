@@ -15,22 +15,20 @@
  * limitations under the License.
  */
 
-package org.apache.solr.ui.components.main.integration
+package org.apache.solr.ui.views.indexAndQuery
 
-import org.apache.solr.ui.components.main.MainComponent
-import org.apache.solr.ui.components.root.RootComponent
-import org.apache.solr.ui.views.navigation.MainMenu
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import org.apache.solr.ui.components.indexAndQuery.IndexAndQueryComponent
 
-val MainComponent.Child.asMainMenu: MainMenu
-    get() = when (this) {
-        // TODO Add additional mappings once more children are supported
-        is MainComponent.Child.Cluster -> MainMenu.Cluster
-
-        is MainComponent.Child.Configsets -> MainMenu.Configsets
-
-        is MainComponent.Child.Environment -> MainMenu.Environment
-
-        is MainComponent.Child.IndexAndQuery -> MainMenu.IndexAndQuery
-
-        is MainComponent.Child.Logging -> MainMenu.Logging
-    }
+/**
+ * This scene is the overall view of the Index and Query UI
+ */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun IndexAndQueryScene(
+    component: IndexAndQueryComponent,
+    modifier: Modifier = Modifier,
+) = Text("Welcome to Index and Query")

@@ -31,6 +31,8 @@ import org.apache.solr.ui.components.configsets.di.ConfigsetsComponent
 import org.apache.solr.ui.components.configsets.di.DefaultConfigsetsComponent
 import org.apache.solr.ui.components.environment.EnvironmentComponent
 import org.apache.solr.ui.components.environment.integration.DefaultEnvironmentComponent
+import org.apache.solr.ui.components.indexAndQuery.IndexAndQueryComponent
+import org.apache.solr.ui.components.indexAndQuery.integration.DefaultIndexAndQueryComponent
 import org.apache.solr.ui.components.logging.LoggingComponent
 import org.apache.solr.ui.components.logging.integration.DefaultLoggingComponent
 import org.apache.solr.ui.components.main.MainComponent
@@ -46,6 +48,7 @@ class DefaultMainComponent internal constructor(
     private val clusterComponent: (AppComponentContext) -> ClusterComponent,
     private val configsetsComponent: () -> ConfigsetsComponent,
     private val environmentComponent: (AppComponentContext) -> EnvironmentComponent,
+    private val indexAndQueryComponent: (AppComponentContext) -> IndexAndQueryComponent,
     private val loggingComponent: (AppComponentContext) -> LoggingComponent,
     private val output: (Output) -> Unit,
 ) : MainComponent,
@@ -84,6 +87,9 @@ class DefaultMainComponent internal constructor(
                 storeFactory = storeFactory,
                 httpClient = httpClient,
             )
+        },
+        indexAndQueryComponent = { childContext ->
+            DefaultIndexAndQueryComponent()
         },
         loggingComponent = { childContext ->
             DefaultLoggingComponent(
@@ -138,9 +144,8 @@ class DefaultMainComponent internal constructor(
         // Configuration.Collections ->
         //     NavigationComponent.Child.Collections(collectionsComponent(componentContext))
 
-        // TODO Uncomment once IndexAndQueries available
-        // Configuration.IndexAndQueries ->
-        //     NavigationComponent.Child.IndexAndQueries(indexAndQueriesComponent(componentContext))
+        Configuration.IndexAndQuery ->
+            Child.IndexAndQuery(indexAndQueryComponent(componentContext))
 
         Configuration.Environment -> Child.Environment(environmentComponent(componentContext))
 
