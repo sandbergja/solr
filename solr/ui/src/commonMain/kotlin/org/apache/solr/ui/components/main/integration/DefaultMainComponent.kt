@@ -138,9 +138,9 @@ class DefaultMainComponent internal constructor(
         // Configuration.Collections ->
         //     NavigationComponent.Child.Collections(collectionsComponent(componentContext))
 
-        // TODO Uncomment once QueriesAndOperations available
-        // Configuration.QueriesAndOperations ->
-        //     NavigationComponent.Child.QueriesAndOperations(queriesAndOperationsComponent(componentContext))
+        // TODO Uncomment once IndexAndQueries available
+        // Configuration.IndexAndQueries ->
+        //     NavigationComponent.Child.IndexAndQueries(indexAndQueriesComponent(componentContext))
 
         Configuration.Environment -> Child.Environment(environmentComponent(componentContext))
 
@@ -192,7 +192,7 @@ class DefaultMainComponent internal constructor(
         data object Collections : Configuration
 
         @Serializable
-        data object QueriesAndOperations : Configuration
+        data object IndexAndQuery : Configuration
 
         @Serializable
         data object Environment : Configuration
@@ -211,7 +211,7 @@ class DefaultMainComponent internal constructor(
         MainMenu.Security -> Configuration.Security
         MainMenu.Configsets -> Configuration.Configsets
         MainMenu.Collections -> Configuration.Collections
-        MainMenu.QueriesAndOperations -> Configuration.QueriesAndOperations
+        MainMenu.IndexAndQuery -> Configuration.IndexAndQuery
         MainMenu.Environment -> Configuration.Environment
         MainMenu.Logging -> Configuration.Logging
         MainMenu.ThreadDump -> Configuration.ThreadDump

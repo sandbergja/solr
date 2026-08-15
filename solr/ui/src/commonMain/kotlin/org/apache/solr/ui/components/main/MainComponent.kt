@@ -72,8 +72,8 @@ interface MainComponent : NavigationComponent {
         // TODO Uncomment once MetricsComponent available
         // data class Collections(val component: CollectionsComponent): Child
 
-        // TODO Uncomment once QueriesAndOperationsComponent available
-        // data class QueriesAndOperations(val component: QueriesAndOperationsComponent): Child
+        // TODO Uncomment once IndexAndQueries available
+        // data class IndexAndQueries(val component: IndexAndQueriesComponent): Child
 
         /**
          * Child that leads to the environment section.
