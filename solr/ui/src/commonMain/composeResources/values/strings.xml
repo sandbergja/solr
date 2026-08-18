@@ -47,6 +47,7 @@
   <string name="error_solr_host_not_found">Solr host could not be found.</string>
   <string name="error_unknown">An unknown error occurred.</string>
   <string name="error_invalid_credentials">Invalid credentials. Please try again.</string>
+  <string name="error_no_collections_available">No collections are available</string>
 
   <!-- Navigation (nav) -->
   <string name="nav_cluster">Cluster</string>
