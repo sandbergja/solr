@@ -1,0 +1,23 @@
+
+./gradlew :solr:ui:check
+./gradlew :solr:ui:run
+
+./gradlew dev
+cd ./solr/packaging/build/dev
+bin/solr start
+
+
+* Add a test that the provider can respond to an Intent
+* HTTP client makes up its own irrelevant Error, it should actually use the data from the server response
+* Mapper is responsible for mapping a Store to a Model (they may be similar) -- if visibility/type system allows it, write a unit test.  Otherwise, find another way to exercise it
+* Change the xml from Queries and Operations to Index & Query
+* Create previews with preview component implementations to check the UI implementation
+* Create an IndexAndQueryContent composable (can tdd it!)
+* Enable the IndexAndQuery on the sidebar (uncomment in MainComponent and add to MainContent)
+* Create a composable for the dropdown (TDD just a basic one)
+* TDD dropdown can accept an http client or some kind of abstraction
+* TDD dropdown is gray until data is loaded
+* Look to the jira for more to do
+* Check with Christos on slack about the name of this screen: Index & Query (as in the figmas) or Queries and Operations (as in the current iteration of the UI).  If I guessed wrong, automated rename everything
+* SEE if there is a way I can avoid null in the Model
+* Add javadocs for everything, make sure they are accurate
